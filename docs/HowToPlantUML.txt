@@ -1,0 +1,7 @@
+
+1. Install latest JAVA
+2. Add JAVA to PATH (in environment variables)
+3. download plantuml.jar from http://plantuml.com/download
+4. Copy plantuml.jar to C:\Users\"Your Username"\AppData\Roaming\Microsoft\Templates
+5. Install Graphviz from http://www.graphviz.org/Download_windows.php (download the msi and run it)
+6. Add environment variable GRAPHVIZ_DOT to location of DOT.EXE (should be under C:\Program Files (x86)\Graphviz2.38\bin)
