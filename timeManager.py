@@ -4,7 +4,13 @@ from src.Window import Model
 import tkinter as tk
 from threading import Thread
 import time
-class makeThread (Thread):
+
+TimeManagerWinWidth = 700
+TimeManagerWinHeight = 500
+TimeManagerTitle = "Time Manager"
+TimeManagerClockFont = "Calibri"
+
+class TimeThread (Thread):
 	def __init__ (self,func):
 		Thread.__init__(self)
 		self.__action = func
@@ -20,9 +26,9 @@ class makeThread (Thread):
 class TimeManager():
 	def __init__ (self):
 		self.cl = Clock()
-		self.model = Model("Time Manager", 700, 500)
+		self.model = Model(TimeManagerTitle, TimeManagerWinWidth, TimeManagerWinHeight,TimeManagerClockFont)
 	def run(self):
-		self.timeThread = makeThread(self.TimeTick)
+		self.timeThread = TimeThread(self.TimeTick)
 		self.timeThread.start()
 	def TimeTick(self):
 		t = self.cl.GetCurrTime()
@@ -36,5 +42,6 @@ def main():
 	TM.run()
 	tk.mainloop()
 	TM.stop()
+
 if __name__=='__main__':
 	main()
