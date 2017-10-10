@@ -1,12 +1,14 @@
 
 from src.Clock import Clock
+from src.Clock import CTime
+from src.AlarmClock import AlarmClock
 from src.Window import Model
 import tkinter as tk
 from threading import Thread
 import time
 
 TimeManagerWinWidth = 700
-TimeManagerWinHeight = 500
+TimeManagerWinHeight = 550
 TimeManagerTitle = "Time Manager"
 TimeManagerClockFont = "Calibri"
 
@@ -25,14 +27,26 @@ class TimeThread (Thread):
 				
 class TimeManager():
 	def __init__ (self):
-		self.cl = Clock()
-		self.model = Model(TimeManagerTitle, TimeManagerWinWidth, TimeManagerWinHeight,TimeManagerClockFont)
+		self.CL = Clock()
+		self.AlarmCL = AlarmClock()
+		self.model = Model(self, TimeManagerTitle, TimeManagerWinWidth, TimeManagerWinHeight,TimeManagerClockFont)
+		
+	def UpdateAlarm(self, t, days):
+		self.AlarmCL.SetAlarmTime(t)
+		self.AlarmCL.SetAlarmDays(days)
+		
 	def run(self):
 		self.timeThread = TimeThread(self.TimeTick)
 		self.timeThread.start()
+		
 	def TimeTick(self):
-		t = self.cl.GetCurrTime()
+		t = self.CL.GetCurrTime()
 		self.model.UpdateTime(t)
+		ON = self.AlarmCL.isAlarmOn()
+		ta = self.AlarmCL.GetAlarmTime()
+		d = self.AlarmCL.GetAlarmDays()
+		self.model.UpdateAlarm(ON, ta, d)
+		
 	def stop(self):
 		self.timeThread.stop=True
 

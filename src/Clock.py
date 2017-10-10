@@ -2,15 +2,16 @@
 import datetime
 from enum import Enum
 
-class WeekDays(Enum):
-	Mon = 0
-	Tue = 1
-	Wed = 2
-	Thu = 3
-	Fri = 4
-	Sat = 5
-	Sun = 6
-	
+WeekDays={
+	0 : 'Mon',
+	1 : 'Tue',
+	2 : 'Wed',
+	3 : 'Thu',
+	4 : 'Fri',
+	5 : 'Sat',
+	6 : 'Sun',
+}
+
 class CTime:
 	def __init__(self, hh, mm, ss):
 		self.hh = hh
@@ -44,5 +45,5 @@ class Clock:
 		return CTime(self.lastTime.hour, self.lastTime.minute, self.lastTime.second)
 		
 	def GetWeekDay(self):
-		return WeekDays(self.lastTime.weekday())
+		return WeekDays[self.lastTime.weekday()]
 
